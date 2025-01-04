@@ -24,7 +24,6 @@ on:
 
 jobs:
   publish:
-    needs: check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
