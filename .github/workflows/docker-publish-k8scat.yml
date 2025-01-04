@@ -18,9 +18,13 @@ name: Publish Docker Image K8sCat
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: 'version'
+      image_version:
+        description: 'image_version'
         required: true
+      apollo_version:
+        description: 'apollo_version'
+        required: false
+        default: 2.4.0-SNAPSHOT
 
 jobs:
   publish:
@@ -53,6 +57,6 @@ jobs:
           platforms: linux/amd64
           file: ${{ matrix.dockerfile }}
           push: true
-          build-args: VERSION=${{ github.event.inputs.version }}
+          build-args: VERSION=${{ github.event.inputs.apollo_version }}
           tags: k8scat/apollo-${{ matrix.service }}:${{ github.event.inputs.version }}
 
