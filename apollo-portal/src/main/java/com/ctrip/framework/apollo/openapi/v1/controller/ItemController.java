@@ -123,6 +123,9 @@ public class ItemController {
     }
 
     if (createIfNotExists) {
+      if (StringUtils.isEmpty(item.getDataChangeCreatedBy())) {
+        throw new BadRequestException("dataChangeCreatedBy is required when createIfNotExists is true");
+      }
       this.itemOpenApiService.createOrUpdateItem(appId, env, clusterName, namespaceName, item);
     } else {
       this.itemOpenApiService.updateItem(appId, env, clusterName, namespaceName, item);
